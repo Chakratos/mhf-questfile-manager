@@ -8,11 +8,11 @@
         Style="{DynamicResource MainWindowStyle}"
         Title="MHF-QuestfileManager" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="listQuestFiles" d:ItemsSource="{d:SampleData ItemCount=5}" Width="200" Margin="0,0,600,0" SelectionMode="Extended" />
+        <ListBox x:Name="listQuestFiles" d:ItemsSource="{d:SampleData ItemCount=5}" Width="200" SelectionMode="Extended" HorizontalAlignment="Left" />
         <TextBox x:Name="GRPInput" HorizontalAlignment="Left" Margin="217,23,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" PreviewTextInput="GRPInput_PreviewTextInput"/>
         <Button x:Name="setGRPBtn" Content="Set GRP" HorizontalAlignment="Left" Margin="342,22,0,0" VerticalAlignment="Top" Click="setGRPBtn_Click"/>
-        <Button x:Name="readGRPBtn" Content="Read GRP" HorizontalAlignment="Left" Margin="400,22,0,0" VerticalAlignment="Top" Click="readGRPBtn_Click"/>
+        <Button x:Name="readGRPBtn" Content="Read GRP" HorizontalAlignment="Left" Margin="400,22,0,0" VerticalAlignment="Top" Click="readGRPBtn_Click" Cursor="Hand"/>
         <Label Content="GRP Points:" HorizontalAlignment="Left" Margin="217,0,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="reloadFilesBtn" Content="Reload Files" HorizontalAlignment="Left" Margin="205,382,0,0" Click="reloadFilesBtn_Click" Height="20" VerticalAlignment="Top" Cursor="Hand"/>
+        <Button x:Name="reloadFilesBtn" Content="Reload Files" HorizontalAlignment="Left" Margin="205,0,0,32" Click="reloadFilesBtn_Click" Height="20" VerticalAlignment="Bottom" Cursor="Hand"/>
     </Grid>
 </Window>
