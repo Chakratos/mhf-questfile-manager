@@ -24,8 +24,10 @@ namespace MHF_QuestfileManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        string pathToQuests;
         int GRPOffset = 0x164;
         string[] files;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -34,9 +36,9 @@ namespace MHF_QuestfileManager
 
         private void ReloadFiles()
         {
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\quests";
-            Directory.CreateDirectory(path);
-            files = Directory.GetFiles(path, "*.bin").Select(file => Path.GetFileName(file)).ToArray();
+            pathToQuests = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\quests\\";
+            Directory.CreateDirectory(pathToQuests);
+            files = Directory.GetFiles(pathToQuests, "*.bin").Select(file => Path.GetFileName(file)).ToArray();
             listQuestFiles.ItemsSource = files;
         }
 
@@ -58,7 +60,7 @@ namespace MHF_QuestfileManager
 
             for (int i = 0; i < selectedFiles.Length; i++)
             {
-                byte[] buffer = File.ReadAllBytes("quests\\" + selectedFiles[i]);
+                byte[] buffer = File.ReadAllBytes(pathToQuests + selectedFiles[i]);
                 MemoryStream msInput = new MemoryStream(buffer);
                 BinaryReader brInput = new BinaryReader(msInput);
                 brInput.BaseStream.Seek(offset, SeekOrigin.Begin);
@@ -73,13 +75,13 @@ namespace MHF_QuestfileManager
         {
             for (int i = 0; i < selectedFiles.Length; i++)
             {
-                byte[] buffer = File.ReadAllBytes(selectedFiles[i]);
+                byte[] buffer = File.ReadAllBytes(pathToQuests + selectedFiles[i]);
 
                 for (int w = 0; w < value.Length; w++) buffer[offset + w] = value[w];
 
                 // Output file
-                Directory.CreateDirectory("output");
-                string outputFile = $"output\\{selectedFiles[i]}";
+                string outputFile = pathToQuests + selectedFiles[i];
+                MessageBox.Show("Wrote changes to quest file/s");
                 File.WriteAllBytes(outputFile, buffer);
             }
         }
