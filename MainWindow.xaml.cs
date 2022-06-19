@@ -81,7 +81,6 @@ namespace MHF_QuestfileManager
 
                 // Output file
                 string outputFile = pathToQuests + selectedFiles[i];
-                MessageBox.Show("Wrote changes to quest file/s");
                 File.WriteAllBytes(outputFile, buffer);
             }
         }
@@ -93,8 +92,7 @@ namespace MHF_QuestfileManager
 
             Dictionary<int, Tuple<string, string>> GRPValues = ReadAtOffset(selectedFiles, GRPOffset);
             WriteToFile("GRP", GRPValues);
-            MessageBox.Show(string.Join(Environment.NewLine, GRPValues));
-            MessageBox.Show("GRP Values for the selected files were also written to the GRP.txt");
+            MessageBox.Show(string.Join(Environment.NewLine, GRPValues) + Environment.NewLine + Environment.NewLine + "GRP Values for the selected files were also written to the GRP.txt");
         }
 
         private void setGRPBtn_Click(object sender, RoutedEventArgs e)
@@ -103,6 +101,7 @@ namespace MHF_QuestfileManager
             if (selectedFiles.Length == 0) return;
 
             WriteToOffset(selectedFiles, GRPOffset, BitConverter.GetBytes(Convert.ToUInt32(GRPInput.Text)));
+            MessageBox.Show("Wrote changes to quest file/s");
         }
 
         public string[] getSelectedFilesAsArray()
